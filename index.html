@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전통시장 디지털 전환 지원금 심사</title>
+<style>
+:root{--navy:#17324d;--blue:#245a83;--bg:#f4f7fb;--line:#e2e8f0;--text:#182536;--muted:#66758a;--green:#137a50;--green-bg:#e9f7ef;--red:#b42318;--red-bg:#fff0ef;--amber:#8a5a00;--amber-bg:#fff6df}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+header{background:linear-gradient(120deg,#17324d,#245a83);color:#fff;padding:32px max(22px,calc((100vw - 1200px)/2)) 28px}
+.eyebrow{font-size:12px;letter-spacing:.12em;font-weight:800;opacity:.8;margin-bottom:8px}.headrow{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}h1{font-size:clamp(24px,3vw,34px);line-height:1.25;margin:0 0 8px;font-weight:800;letter-spacing:-.04em}.subtitle{margin:0;color:#dce8f2;font-size:14px}.headnote{font-size:12px;color:#dce8f2;border:1px solid #6f8ca6;padding:8px 12px;border-radius:8px}
+main{max-width:1200px;margin:26px auto 48px;padding:0 20px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px 20px;box-shadow:0 2px 8px #102a4308}.metric .label{font-size:13px;color:var(--muted);font-weight:650}.metric .value{font-size:28px;font-weight:800;letter-spacing:-.04em;margin-top:5px}.metric .unit{font-size:13px;font-weight:600;color:var(--muted);margin-left:4px}.metric.approved .value{color:var(--green)}.metric.rejected .value{color:var(--red)}.metric.unable .value{color:var(--amber)}
+.rules{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:20px}.rules h2{font-size:15px;margin:0 0 8px}.rule-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px}.rule-main{font-size:14px;color:#334155}.rule-main strong{color:var(--navy)}.rule-warning{font-size:13px;color:#704b00;background:var(--amber-bg);padding:10px 12px;border-radius:8px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 12px}.toolbar h2{font-size:18px;margin:0}.searchbox{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #ccd6e2;border-radius:9px;padding:0 12px;min-width:min(100%,320px)}.searchbox span{color:var(--muted)}.searchbox input{font:inherit;border:0;outline:0;padding:11px 0;width:100%;background:transparent}.count{font-size:13px;color:var(--muted);margin-left:auto}.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 8px #102a4308}table{width:100%;border-collapse:collapse;min-width:720px;font-size:14px}thead{background:#f0f4f8}th{font-size:12px;color:#526277;font-weight:750;text-align:left;padding:14px 16px;white-space:nowrap;border-bottom:1px solid var(--line)}td{padding:14px 16px;border-bottom:1px solid #edf1f5;white-space:nowrap}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#f8fafc}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.merchant{font-weight:750;color:#20364c}.status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}.status:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.approved-row .status{color:var(--green);background:var(--green-bg)}.rejected-row{background:#fff8f7}.rejected-row .status{color:var(--red);background:var(--red-bg)}.unable-row{background:#fffbef}.unable-row .status{color:var(--amber);background:var(--amber-bg)}.invalid{color:var(--amber);font-weight:700}.empty{padding:38px;text-align:center;color:var(--muted)}.foot{margin-top:13px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){header{padding:25px 20px}.summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:15px}.metric .value{font-size:24px}.rule-grid{grid-template-columns:1fr}main{padding:0 12px;margin-top:16px}.toolbar{align-items:stretch}.searchbox{width:100%}.count{width:100%;margin:0}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">SMALL BUSINESS & MARKET INNOVATION</div><div class="headrow"><div><h1>전통시장 디지털 전환 지원금 심사</h1><p class="subtitle">신청 22건 · 직원 수 기준 지원 한도 자동 산정</p></div><div class="headnote">중소벤처기업부 · 시장경영혁신과</div></div></header>
+<main>
+<section class="summary" aria-label="심사 요약">
+<div class="metric approved"><div class="label">승인</div><div class="value" id="approvedCount">0<span class="unit">건</span></div></div>
+<div class="metric rejected"><div class="label">반려</div><div class="value" id="rejectedCount">0<span class="unit">건</span></div></div>
+<div class="metric unable"><div class="label">심사불가</div><div class="value" id="unableCount">0<span class="unit">건</span></div></div>
+<div class="metric"><div class="label">승인 신청액 합계</div><div class="value" id="approvedSum">0<span class="unit">원</span></div></div>
+</section>
+<section class="rules">
+<h2>판정 기준</h2>
+<div class="rule-grid"><div class="rule-main"><strong>한도액 = 직원수 × 550,000원</strong><br>신청액이 한도액 이하이면 승인(한도액과 같아도 승인), 초과하면 반려합니다.</div><div class="rule-warning"><strong>심사불가 처리 기준</strong><br>직원수 또는 신청액이 비어 있거나, 숫자로 확인할 수 없거나, 0 이하인 경우 심사불가로 분류합니다. 심사불가 건은 승인·반려 건수 및 승인 신청액 합계에서 제외합니다.</div></div>
+</section>
+<div class="toolbar"><h2>신청 목록</h2><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="상호명 검색" aria-label="상호명 검색"></label><div class="count" id="visibleCount">표시 22건 / 전체 22건</div></div>
+<div class="table-wrap"><table><thead><tr><th>상호명</th><th>업종</th><th class="num">직원수</th><th class="num">신청액</th><th class="num">한도액</th><th>판정</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty" hidden>검색 결과가 없습니다.</div></div>
+<div class="foot"><span>금액 단위: 원 · 한도액은 직원 수를 기준으로 자동 계산</span><span>※ 심사불가 건은 담당자 확인 후 재심사 필요</span></div>
+</main>
+<script>
+const applications = [{"상호명": "소나무공방", "업종": "공예", "소재동": "중앙동", "직원수": 4, "신청액": 2200000, "신청일": "2026-10-06"}, {"상호명": "은하수분식", "업종": "분식", "소재동": "중앙동", "직원수": 4, "신청액": 2250000, "신청일": "2026-10-09"}, {"상호명": "모닝수산", "업종": "수산", "소재동": "항구동", "직원수": "", "신청액": 1800000, "신청일": "2026-10-13"}, {"상호명": "달고나상회", "업종": "잡화", "소재동": "시장동", "직원수": 3, "신청액": -1200000, "신청일": "2026-10-13"}, {"상호명": "해들목공소", "업종": "목공", "소재동": "성안동", "직원수": 6, "신청액": 3100000, "신청일": "2026-10-10"}, {"상호명": "금빛정육", "업종": "정육", "소재동": "시장동", "직원수": 5, "신청액": 2900000, "신청일": "2026-10-12"}, {"상호명": "초록채소", "업종": "청과", "소재동": "시장동", "직원수": 2, "신청액": 1050000, "신청일": "2026-10-13"}, {"상호명": "달빛찻집", "업종": "카페", "소재동": "중앙동", "직원수": 3, "신청액": 1600000, "신청일": "2026-10-08"}, {"상호명": "한결제과", "업종": "제과", "소재동": "성안동", "직원수": 4, "신청액": 2100000, "신청일": "2026-10-14"}, {"상호명": "바다반찬", "업종": "반찬", "소재동": "항구동", "직원수": 3, "신청액": 1700000, "신청일": "2026-10-14"}, {"상호명": "동백국수", "업종": "한식", "소재동": "중앙동", "직원수": 5, "신청액": 2700000, "신청일": "2026-10-13"}, {"상호명": "실과바늘", "업종": "수선", "소재동": "시장동", "직원수": 2, "신청액": 1000000, "신청일": "2026-10-12"}, {"상호명": "온달철물", "업종": "철물", "소재동": "성안동", "직원수": 3, "신청액": 1450000, "신청일": "2026-10-14"}, {"상호명": "구름문구", "업종": "문구", "소재동": "중앙동", "직원수": 2, "신청액": 1100000, "신청일": "2026-10-09"}, {"상호명": "미소약방", "업종": "약업", "소재동": "시장동", "직원수": 4, "신청액": 2000000, "신청일": "2026-10-12"}, {"상호명": "들꽃화원", "업종": "화훼", "소재동": "성안동", "직원수": 3, "신청액": 1650000, "신청일": "2026-10-07"}, {"상호명": "청솔쌀집", "업종": "곡물", "소재동": "시장동", "직원수": 2, "신청액": 1200000, "신청일": "2026-10-08"}, {"상호명": "은빛수선집", "업종": "수선", "소재동": "항구동", "직원수": 1, "신청액": 500000, "신청일": "2026-10-07"}, {"상호명": "해오름건어물", "업종": "건어물", "소재동": "항구동", "직원수": 4, "신청액": 2150000, "신청일": "2026-10-07"}, {"상호명": "참나무반상", "업종": "목공", "소재동": "성안동", "직원수": 5, "신청액": 2650000, "신청일": "2026-10-08"}, {"상호명": "보름달떡집", "업종": "떡집", "소재동": "중앙동", "직원수": 3, "신청액": 1500000, "신청일": "2026-10-07"}, {"상호명": "솔바람서점", "업종": "서적", "소재동": "중앙동", "직원수": 2, "신청액": 1090000, "신청일": "2026-10-06"}];
+const fmt = new Intl.NumberFormat('ko-KR');
+const validPositive = v => v !== null && v !== undefined && String(v).trim() !== '' && Number.isFinite(Number(v)) && Number(v) > 0;
+function assess(item){
+  const staffOK = validPositive(item['직원수']);
+  const amountOK = validPositive(item['신청액']);
+  const limit = staffOK ? Number(item['직원수']) * 550000 : null;
+  if(!staffOK || !amountOK) return {status:'심사불가', limit};
+  return {status:Number(item['신청액']) <= limit ? '승인' : '반려', limit};
+}
+const assessed = applications.map((item,index)=>({...item,_index:index,...assess(item)}));
+const approved = assessed.filter(x=>x.status==='승인');
+const rejected = assessed.filter(x=>x.status==='반려');
+const unable = assessed.filter(x=>x.status==='심사불가');
+document.getElementById('approvedCount').innerHTML = `${approved.length}<span class="unit">건</span>`;
+document.getElementById('rejectedCount').innerHTML = `${rejected.length}<span class="unit">건</span>`;
+document.getElementById('unableCount').innerHTML = `${unable.length}<span class="unit">건</span>`;
+document.getElementById('approvedSum').innerHTML = `${fmt.format(approved.reduce((s,x)=>s+Number(x['신청액']),0))}<span class="unit">원</span>`;
+function displayValue(v){return v===null||v===undefined||String(v).trim()===''?'<span class="invalid">미입력</span>':fmt.format(Number(v)) === 'NaN' ? `<span class="invalid">${escapeHTML(String(v))}</span>` : fmt.format(Number(v));}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(){
+ const q=document.getElementById('search').value.trim().toLocaleLowerCase('ko-KR');
+ const shown=assessed.filter(x=>String(x['상호명']??'').toLocaleLowerCase('ko-KR').includes(q));
+ document.getElementById('visibleCount').textContent=`표시 ${shown.length}건 / 전체 ${assessed.length}건`;
+ const tbody=document.getElementById('rows');
+ tbody.innerHTML=shown.map(x=>{
+  const cls=x.status==='승인'?'approved-row':x.status==='반려'?'rejected-row':'unable-row';
+  const staff=validPositive(x['직원수'])?fmt.format(Number(x['직원수']))+'명':displayValue(x['직원수']);
+  const amount=validPositive(x['신청액'])?fmt.format(Number(x['신청액'])):displayValue(x['신청액']);
+  const limit=x.limit===null?'—':fmt.format(x.limit);
+  return `<tr class="${cls}"><td class="merchant">${escapeHTML(x['상호명']??'상호명 미입력')}</td><td>${escapeHTML(x['업종']??'—')}</td><td class="num">${staff}</td><td class="num">${amount}</td><td class="num">${limit}</td><td><span class="status">${x.status}</span></td></tr>`;
+ }).join('');
+ document.getElementById('empty').hidden=shown.length!==0;
+}
+document.getElementById('search').addEventListener('input',render);
+render();
+</script>
+</body></html>
